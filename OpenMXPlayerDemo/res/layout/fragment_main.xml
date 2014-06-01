@@ -1,0 +1,115 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="net.pocketmagic.android.OpenMXPlayerDemo.MainActivity$PlaceholderFragment" >
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Freeware OpenSource Audio Player Library" />
+    <Button
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/but1"
+        android:id="@+id/idbut1"
+        />
+    <View
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dp"
+	    android:background="@android:color/darker_gray"
+	    />
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+	    <Button
+	        android:layout_width="match_parent" 
+	        android:layout_height="wrap_content"
+	        android:text="@string/but2a"
+	        android:id="@+id/idbut2a"
+	        android:layout_weight="1.0"
+	        />
+	    <Button
+	        android:layout_width="match_parent" 
+	        android:layout_height="wrap_content"
+	        android:text="@string/but2b"
+	        android:id="@+id/idbut2b"
+	        android:layout_weight="1.0"
+	        />
+	    <Button
+	        android:layout_width="match_parent" 
+	        android:layout_height="wrap_content"
+	        android:text="@string/but2c"
+	        android:id="@+id/idbut2c"
+	        android:layout_weight="1.0"
+	        />    
+    </LinearLayout>
+    
+    <EditText 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter file path or valid URL"
+        android:text="http://stream.rfi.fr/rfimonde/all/rfimonde-64k.mp3"
+        android:id="@+id/idet1"
+        />
+    <Button
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/but3"
+        android:id="@+id/idbut3"
+        />
+    <View
+	    android:layout_width="fill_parent"
+	    android:layout_height="1dp"
+	    android:background="@android:color/darker_gray"
+	    />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/seek_instr" 
+        android:id="@+id/idtv1"/>
+    
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekbar"
+        />
+    <Button
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/but4"
+        android:id="@+id/idbut4"
+        />
+    <Button
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/but5"
+        android:id="@+id/idbut5"
+        />
+    <Button
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:text="@string/but6"
+        android:id="@+id/idbut6"
+        />
+            
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/app_about" />
+        </LinearLayout>
+        
+    
+
+</RelativeLayout>

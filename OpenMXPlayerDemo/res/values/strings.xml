@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">OpenMXPlayerDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_about">(C) 2014 , Radu Motisan , www.pocketmagic.net</string>
+    <string name="but1">List codecs</string>
+    <string name="but2a">1.Load MP3</string>
+    <string name="but2b">1.Load AAC</string>
+    <string name="but2c">1.Load WMA</string>
+    <string name="but3">1.Load custom</string>
+	<string name="but4">2.Play</string>
+    <string name="but5">3.Pause</string>
+	<string name="but6">4.Stop</string>
+	<string name="seek_instr">Move seekbar to seek</string>
+    
+</resources>
