@@ -28,6 +28,7 @@ public class MainActivity extends Activity   {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
@@ -41,7 +42,8 @@ public class MainActivity extends Activity   {
 	 * A placeholder fragment containing a simple view.
 	 */
 	public static class PlaceholderFragment extends Fragment implements OnClickListener {
-
+		
+		
 		SeekBar seekbar;
 		EditText et;
 		TextView tv;
@@ -141,7 +143,7 @@ public class MainActivity extends Activity   {
 				break;
 				case R.id.idbut5:
 					Log.d(LOG_TAG, "Pause.");
-					//p.play();
+					p.pause();
 				break;
 				case R.id.idbut6:
 					Log.d(LOG_TAG, "Stop.");

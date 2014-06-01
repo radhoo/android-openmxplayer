@@ -87,14 +87,28 @@ public class OpenMXPlayer implements Runnable {
 	}
 	
 	public void play() {
-		stop = false;
-		
-		new Thread(this).start();
+		if (state.get() == PlayerStates.STOPPED) {
+			stop = false;
+			new Thread(this).start();
+		}
+		if (state.get() == PlayerStates.READY_TO_PLAY) {
+			state.set(PlayerStates.PLAYING);
+			syncNotify();
+		}
 	}
 	
+	/**
+     * Call notify to control the PAUSE (waiting) state, when the state is changed
+     */
+    public synchronized void syncNotify() {
+    	notify();
+    }
 	public void stop() {
 		stop = true;
-
+	}
+	
+	public void pause() {
+		state.set(PlayerStates.READY_TO_PLAY);
 	}
 	
 	public void seek(long pos) {
@@ -106,6 +120,21 @@ public class OpenMXPlayer implements Runnable {
 		seek(pos);
 	}
 	
+	 
+    /**
+     * A pause mechanism that would block current thread when pause flag is set (READY_TO_PLAY)
+     */
+    public synchronized void waitPlay(){
+    	// if (duration == 0) return;
+        while(state.get() == PlayerStates.READY_TO_PLAY) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
 	@Override
 	public void run() {
 		android.os.Process.setThreadPriority(android.os.Process.THREAD_PRIORITY_URGENT_AUDIO);
@@ -155,7 +184,7 @@ public class OpenMXPlayer implements Runnable {
 			return;
         }
         
-        state.set(PlayerStates.READY_TO_PLAY);
+        //state.set(PlayerStates.READY_TO_PLAY);
     	if (events != null) handler.post(new Runnable() { @Override public void run() { events.onStart(mime, sampleRate, channels, duration);  } });
 		
         codec.configure(format, null, null, 0);
@@ -181,7 +210,12 @@ public class OpenMXPlayer implements Runnable {
         int noOutputCounter = 0;
         int noOutputCounterLimit = 10;
         
+        state.set(PlayerStates.PLAYING);
         while (!sawOutputEOS && noOutputCounter < noOutputCounterLimit && !stop) {
+        	
+        	// pause implementation
+        	waitPlay();
+        	
         	noOutputCounter++;
         	// read a buffer before feeding it to the decoder
             if (!sawInputEOS) {
@@ -222,10 +256,10 @@ public class OpenMXPlayer implements Runnable {
                 buf.clear();
                 if(chunk.length > 0){        	
                 	audioTrack.write(chunk,0,chunk.length);
-                	if(this.state.get() != PlayerStates.PLAYING) {
+                	/*if(this.state.get() != PlayerStates.PLAYING) {
                 		if (events != null) handler.post(new Runnable() { @Override public void run() { events.onPlay();  } }); 
             			state.set(PlayerStates.PLAYING);
-                	}
+                	}*/
                 	
                 }
                 codec.releaseOutputBuffer(outputBufIndex, false);
