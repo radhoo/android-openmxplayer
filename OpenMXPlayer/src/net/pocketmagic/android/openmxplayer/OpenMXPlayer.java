@@ -211,6 +211,8 @@ public class OpenMXPlayer implements Runnable {
         int noOutputCounterLimit = 10;
         
         state.set(PlayerStates.PLAYING);
+        byte[] chunk = null;
+        int lastChunkSize = -1;
         while (!sawOutputEOS && noOutputCounter < noOutputCounterLimit && !stop) {
         	
         	// pause implementation
@@ -251,7 +253,11 @@ public class OpenMXPlayer implements Runnable {
                 int outputBufIndex = res;
                 ByteBuffer buf = codecOutputBuffers[outputBufIndex];
 
-                final byte[] chunk = new byte[info.size];
+                //final byte[] chunk = new byte[info.size];
+                if(info.size != lastChunkSize){
+                    lastChunkSize = info.size;
+                    chunk = new byte[info.size];
+                }
                 buf.get(chunk);
                 buf.clear();
                 if(chunk.length > 0){        	
